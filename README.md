@@ -5,6 +5,18 @@ No account, no cloud API key, no telemetry. Once set up, it works fully offline.
 
 ---
 
+**© 2026 mintedsage. All rights reserved.**
+
+This code is shared publicly for transparency and feedback only. It is **not** licensed
+for reuse, redistribution, modification, or commercial use without explicit written
+permission from the author. Viewing the source does not grant any rights to copy or
+reuse it.
+
+If you're interested in using, licensing, or contributing to this project, please open
+an issue or contact mntd.sage@gmail.com.
+
+---
+
 ## Architecture
 
 ```
