@@ -1,0 +1,326 @@
+/*
+  Design tokens — "the private study"
+  ------------------------------------
+  Ink       #14161B   primary background
+  Panel     #1C1F26   sidebar / cards
+  Brass     #B08D57   accent, the one warm note in the room
+  Verdigris #4E6E63   secondary accent, an old library-lamp green
+  Parchment #E9E4D6   primary text
+  Muted     #8B8D96   secondary text
+  Fonts: system serif for display (no CDN — this app stays offline),
+         system sans for body/UI.
+*/
+
+:root {
+  --ink: #14161b;
+  --panel: #1c1f26;
+  --panel-alt: #23262f;
+  --brass: #b08d57;
+  --brass-bright: #cda86e;
+  --verdigris: #4e6e63;
+  --parchment: #e9e4d6;
+  --muted: #8b8d96;
+  --border: #2c303a;
+  --display-font: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --body-font: -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--body-font);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  height: 100vh;
+}
+
+/* ---------- Sidebar: "the study" ---------- */
+
+.study {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.crest {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* The signature element: a small brass seal that gently breathes,
+   standing in for "Alfred is present and attentive". */
+.seal {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--brass-bright), var(--brass) 60%, #8a6d3f 100%);
+  box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.15);
+  flex-shrink: 0;
+  animation: breathe 4s ease-in-out infinite;
+}
+.seal.thinking { animation: breathe 0.9s ease-in-out infinite; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.15); }
+  50% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(176, 141, 87, 0.08); }
+}
+
+.crest-text h1 {
+  font-family: var(--display-font);
+  font-size: 22px;
+  margin: 0;
+  letter-spacing: 0.02em;
+  color: var(--parchment);
+}
+.tagline {
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.ledger-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.ledger-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--body-font);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 12px 4px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.ledger-tab:hover { color: var(--parchment); }
+.ledger-tab.active {
+  color: var(--brass-bright);
+  border-bottom: 2px solid var(--brass);
+}
+
+.ledger-panel {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  padding: 14px;
+  gap: 10px;
+}
+.ledger-panel.active { display: flex; }
+
+.panel-add {
+  display: flex;
+  gap: 6px;
+}
+.panel-add input {
+  flex: 1;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--parchment);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: var(--body-font);
+}
+.panel-add input:focus { outline: 1px solid var(--brass); }
+.panel-add button {
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  border-radius: 6px;
+  width: 34px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.panel-add button:hover { background: var(--brass-bright); }
+
+.panel-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--verdigris);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  position: relative;
+}
+.card .meta {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.card .remove {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  background: none;
+  border: none;
+}
+.card .remove:hover { color: var(--brass-bright); }
+.card.done { opacity: 0.45; text-decoration: line-through; }
+
+.model-select {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.model-select label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.model-select select {
+  background: var(--panel-alt);
+  color: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12.5px;
+}
+
+/* ---------- Main: "the chamber" ---------- */
+
+.chamber {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chamber-header {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--verdigris);
+  box-shadow: 0 0 6px var(--verdigris);
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.msg { display: flex; }
+.msg.user { justify-content: flex-end; }
+.msg.alfred { justify-content: flex-start; }
+
+.bubble {
+  max-width: 64%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+.msg.user .bubble {
+  background: var(--brass);
+  color: var(--ink);
+  border-bottom-right-radius: 2px;
+}
+.msg.alfred .bubble {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 2px;
+  font-family: var(--display-font);
+}
+
+.composer {
+  display: flex;
+  gap: 10px;
+  padding: 18px 24px;
+  border-top: 1px solid var(--border);
+}
+.composer input {
+  flex: 1;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--parchment);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: var(--body-font);
+}
+.composer input:focus { outline: 1px solid var(--brass); }
+.composer button {
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  border-radius: 8px;
+  padding: 0 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.composer button:hover { background: var(--brass-bright); }
+
+#mic-btn, #speaker-btn {
+  background: var(--panel-alt);
+  color: var(--parchment);
+  border: 1px solid var(--border);
+  padding: 0 16px;
+  font-size: 16px;
+}
+#mic-btn:hover, #speaker-btn:hover { background: var(--panel-alt); border-color: var(--brass); }
+#mic-btn.recording {
+  background: var(--brass);
+  color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(180, 140, 60, 0.25);
+}
+#speaker-btn.active { border-color: var(--brass); color: var(--brass); }
+
+/* Accessibility: visible focus, reduced motion respected */
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--brass-bright);
+  outline-offset: 1px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .seal { animation: none; }
+}
+
+@media (max-width: 720px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .study { border-right: none; border-bottom: 1px solid var(--border); max-height: 40vh; }
+}

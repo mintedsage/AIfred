@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alfred</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="study">
+      <div class="crest">
+        <div class="seal" id="seal"></div>
+        <div class="crest-text">
+          <h1>Alfred</h1>
+          <p class="tagline">Local. Private. Yours alone.</p>
+        </div>
+      </div>
+
+      <nav class="ledger-tabs">
+        <button class="ledger-tab active" data-tab="memory">Memory</button>
+        <button class="ledger-tab" data-tab="tasks">Tasks</button>
+        <button class="ledger-tab" data-tab="notes">Notes</button>
+        <button class="ledger-tab" data-tab="files">Files</button>
+      </nav>
+
+      <section class="ledger-panel active" id="panel-memory">
+        <div class="panel-add">
+          <input type="text" id="mem-input" placeholder="Teach Alfred something…" />
+          <button id="mem-add-btn">+</button>
+        </div>
+        <div class="panel-list" id="mem-list"></div>
+      </section>
+
+      <section class="ledger-panel" id="panel-tasks">
+        <div class="panel-add">
+          <input type="text" id="task-input" placeholder="Add a task…" />
+          <button id="task-add-btn">+</button>
+        </div>
+        <div class="panel-list" id="task-list"></div>
+      </section>
+
+      <section class="ledger-panel" id="panel-notes">
+        <div class="panel-add">
+          <input type="text" id="note-input" placeholder="Jot a note…" />
+          <button id="note-add-btn">+</button>
+        </div>
+        <div class="panel-list" id="note-list"></div>
+      </section>
+
+      <section class="ledger-panel" id="panel-files">
+        <div class="panel-add">
+          <input type="text" id="file-input" placeholder="Full path to a .txt/.md/.pdf" />
+          <button id="file-add-btn">+</button>
+        </div>
+        <div class="panel-list" id="file-list"></div>
+      </section>
+
+      <div class="model-select">
+        <label for="model-picker">Brain</label>
+        <select id="model-picker"></select>
+      </div>
+    </aside>
+
+    <main class="chamber">
+      <div class="chamber-header">
+        <span class="status-dot"></span>
+        <span>Nothing you say here leaves this room.</span>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="msg alfred">
+          <div class="bubble">Good day. I am Alfred — entirely local, entirely yours. How may I be of service?</div>
+        </div>
+      </div>
+
+      <form class="composer" id="composer">
+        <button type="button" id="mic-btn" title="Hold to talk">🎙</button>
+        <input type="text" id="chat-input" placeholder="Speak freely…" autocomplete="off" />
+        <button type="button" id="speaker-btn" title="Toggle Alfred speaking replies aloud">🔈</button>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+
+  </div>
+
+<script src="/static/chat.js"></script>
+</body>
+</html>

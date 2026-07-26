@@ -1,0 +1,11 @@
+ollama>=0.3.0
+fastapi>=0.111.0
+uvicorn>=0.30.0
+pywebview>=5.0
+sentence-transformers>=3.0.0
+numpy>=1.26.0
+cryptography>=42.0.0
+python-multipart>=0.0.9
+pypdf>=4.2.0
+faster-whisper>=1.0.0
+pyttsx3>=2.90
